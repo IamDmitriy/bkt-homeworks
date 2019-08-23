@@ -2,15 +2,19 @@
 
 Домашние работу по курсу Базовый Kotlin
 
-1. [x] [Введение в язык, основные концепции, базовые конструкции, рабочее окружение](intro/)
+1. [x] [Введение в язык, основные концепции, рабочее окружение](intro/)
 1. [x] [Классы, объекты, наследование](oop/)
-1. [ ] [Функции, функциональное программирование и лямбды](func/)
-1. [ ] [Интерфейсы, работа с коллекциями, Generics](generics/)
-1. [ ] [Annotations и Reflection](reflection/)
-1. [ ] [Coroutines](coroutines/)
-1. [ ] [Kotlin на сервере: REST, создание Backend на Ktor (часть 1)](rest1/)
-1. [ ] [Kotlin на сервере: REST, создание Backend на Ktor (часть 2)](rest2/)
-1. [ ] [Kotlin в Android: Anko (часть 1)](anko1/)
-1. [ ] [Kotlin в Android: Anko (часть 2)](anko2/)
-1. [ ] [Интеграция REST API](integration/)
+1. [x] [Первое Android приложение](first-app/)
+1. [x] [Функции, лямбды, операторы и обработка событий в Android](func/)
+1. [ ] [Коллекции, Generics, интерфейсы](collections/)
+1. [ ] [Coroutines, Annotations и Reflection](coroutines/)
+1. [ ] [Создание Backend на Ktor - CRUD](api-crud/)
+1. [ ] [Создание Backend на Ktor - авторизация](pdf/leciton-api-auth/)
+1. [ ] [Android: Activity, навигация, авторизация](mobile-auth/)
+1. [ ] [Android: Загрузка данных по API, CRUD](mobile-crud/)
+1. [ ] [Android: Работа с камерой, Notifications API](media/)
 1. [ ] [Push-уведомления: серверная и клиентская часть](push/)
+
+Полезные ссылки:
+* [Руководство по установке IDEA, Android Studio](./manulas/installation.md)
+* [Руководство по настройке эмулятора](./manulas/avd.md)
