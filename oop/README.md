@@ -43,7 +43,7 @@
 
 ### `ViewGroup`
 
-Класс, наследующийся от `View`, содержит методы `addView` и `removeView` (внутри хранит список `View` - воспользуйтесь написанным нами на лекции `LinkedList` для хранения списка `View`).
+Класс, наследующийся от `View`, содержит методы `addView` и `removeView` (внутри хранит пока всего одно `View` - как пройдём коллекции, сможет хранить список).
 
 ### `TextView`
 
@@ -73,14 +73,12 @@ println(button.text) // Don't click me
 
 ```kotlin
 val main = ViewGroup()
-val title = Text("Main Screen")
+val title = TextView("Main Screen")
 main.addView(title)
+
 val content = ViewGroup()
-val text = Text("Some interesting article preview")
 val readMore = Button("Read more")
-content.addView(text)
 content.addView(readMore)
-main.addView(content)
 ```
 
 
