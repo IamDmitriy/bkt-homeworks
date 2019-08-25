@@ -1,4 +1,4 @@
-# Домашнее задание к лекции "Введение в Kotlin"
+# Домашнее задание к лекции "Объекты, классы, наследование"
 
 Для каждой задачи создайте решение на базе Gradle и залейте его в GitHub.
 
@@ -12,7 +12,6 @@
     - view/View.kt
     - view/ViewGroup.kt
     - widget/Button.kt
-    - widget/ToggleButton.kt
 - /ru/netology/social
     - main.kt - main
     - model/Post.kt
@@ -43,7 +42,7 @@
 
 ### `ViewGroup`
 
-Класс, наследующийся от `View`, содержит методы `addView` и `removeView` (внутри хранит пока всего одно `View` - как пройдём коллекции, сможет хранить список).
+Класс, наследующийся от `View`, содержит member function `addView` (внутри хранит пока всего одно `View` - как пройдём коллекции, сможет хранить список).
 
 ### `TextView`
 
