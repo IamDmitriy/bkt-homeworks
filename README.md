@@ -16,5 +16,4 @@
 1. [ ] [Push-уведомления: серверная и клиентская часть](push/)
 
 Полезные ссылки:
-* [Руководство по установке IDEA, Android Studio](./manulas/installation.md)
-* [Руководство по настройке эмулятора](./manulas/avd.md)
+* [Руководство по установке IDEA, Android Studio](./manuals/installation.md)
