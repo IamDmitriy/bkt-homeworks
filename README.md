@@ -18,3 +18,4 @@
 Полезные ссылки:
 * [Руководство по установке IDEA, Android Studio](./manuals/installation.md)
 * [Kotlin Gradle Plugin](https://kotlinlang.org/docs/reference/using-gradle.html)
+* [Ответы на вопросы](./manuals/questions.md)
