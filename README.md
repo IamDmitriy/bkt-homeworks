@@ -1,6 +1,6 @@
 # bkt-homeworks
 
-Домашние работу по курсу Базовый Kotlin
+Домашние работы по курсу Базовый Kotlin
 
 1. [x] [Введение в язык, основные концепции, рабочее окружение](intro/)
 1. [x] [Классы, объекты, наследование](oop/)
@@ -16,5 +16,6 @@
 1. [ ] [Push-уведомления: серверная и клиентская часть](push/)
 
 Полезные ссылки:
-* [Руководство по установке IDEA, Android Studio](./manulas/installation.md)
-* [Руководство по настройке эмулятора](./manulas/avd.md)
+* [Руководство по установке IDEA, Android Studio](./manuals/installation.md)
+* [Kotlin Gradle Plugin](https://kotlinlang.org/docs/reference/using-gradle.html)
+* [Репозиторий с кодом с лекций](https://github.com/netology-code/bkt-code)
