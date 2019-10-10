@@ -12,7 +12,7 @@
 1. [x] [Создание Backend на Ktor - авторизация](api-auth/)
 1. [x] [Android: Activity, навигация, авторизация](mobile-auth/)
 1. [x] [Android: Загрузка данных по API, CRUD](mobile-crud/)
-1. [ ] [Android: Работа с камерой, Notifications API](media/)
+1. [x] [Android: Работа с камерой, Notifications API](media/)
 1. [x] [Push-уведомления: серверная и клиентская часть](push/)
 
 Полезные ссылки:
