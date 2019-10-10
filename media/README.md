@@ -2,7 +2,7 @@
 Для каждой задачи создайте решение на базе Gradle и залейте его в GitHub.
 К заданию должен быть прикреплен сервер.
 
-## Задача №1 - реализовать отправку фото
+## Задача №1 - Реализовать отправку и получение фото
 В этой лекции мы полностью реализовали отправку фото на сервер.
 Ваша задача реализовать это у себя в приложении.
 
@@ -151,7 +151,7 @@ data class AttachmentModel(val id: String, val mediaType: AttachmentType) {
 
 ___
 
-## Задача №2 - добавить нотификацию в приложение.
+## Задача №2 - Добавить нотификацию в приложение.
 Давайте после выхода из приложения добавим нотификацию о том, что мы будем рады видеть пользователя в приложении еще раз. Делать это будем только первый раз.
 Для этого на понадобиться флаг, который будет сообщать нам о том, перый раз мы в приложении или нет. Записывать и считывать флаг мы конечно же будем с помощью `SharedPreferences`
 
@@ -190,4 +190,90 @@ fun setNotFirstTime(context: Context) =
 ![](https://i.imgur.com/jfJPKL6.jpg)
 
 
-# Задача № 3 (необязательная) - Jobscheduler и нотификации
+# Задача № 3 (необязательная) - JobScheduler и нотификации
+Если пользователь достаточно долго не заходил в приложение, то можно его оповестить о нашем существовании. Для этих целей нам подойдет `WorkManager`.
+***Ваша задача*** зписывать время последнего посещения пользователя. Планировать задачу через промежутки времени `n` и при запуске задач проверять заходил ли пользователь в приложение в течении этого промежутка. Если нет, то показываем нотификацию, при нажатии на которую откроется приложение.
+
+Добавляем зависимость для `WorkManager`
+```groovy
+    // Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:2.2.0"
+```
+Так же возможно, что придется в gradle app модуля добавить следующие строки:
+```groovy=
+android {
+    ...
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+```
+Время лучше хранить в sharedPreferenc-ах. Вместо храниния того, перый раз мы зашли в приложение или нет, мы можем хранить последнее время посещения. При этом, если время будет 0, значит мы первый раз в приложении.
+
+```kotlin
+const val LAST_TIME_VISIT_SHARED_KEY = "last_time_visit_shared_key"
+const val SHOW_NOTIFICATION_AFTER_UNVISITED_MS:Long = 10*60*1000
+```
+
+Планирование работы: Для планирования работы надо создать класс, который наследуется от класса `Work` и выполнить работу в методе `work`
+Если все прошло успешно, то следует возвращать `Result.success()`
+```kotlin
+class UserNotHereWorker(context: Context, workerParameters: WorkerParameters) :
+  Worker(context, workerParameters) {
+  override fun doWork(): Result {
+    // если пользователь заходил меньше SHOW_NOTIFICATION_AFTER_UNVISITED_MS времени, то показываем нотификацию
+    return Result.success()
+  }
+}
+```
+
+Файл Utils теперь будет выглядеть следующим образом.
+```kotlin
+fun isFirstTime(context: Context) =
+  context.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).getLong(
+    LAST_TIME_VISIT_SHARED_KEY, 0
+  ) == 0L
+
+fun setLastVisitTime(context: Context, currentTimeMillis: Long) =
+  context.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE)
+    .edit()
+    .putLong(LAST_TIME_VISIT_SHARED_KEY, currentTimeMillis)
+    .commit()
+```
+
+Теперь в `onCreate` каждый раз можно планировать задачу, при этом, если она была запланирована, то ничего не произойдет
+```kotlin
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    scheduleJob()
+    ...
+    
+  override fun onDestroy() {
+    super.onDestroy()
+    if (isFirstTime(this)) {
+      NotifictionHelper.comeBackNotification(this)
+      setLastVisitTime(this,System.currentTimeMillis())
+    }else{
+      setLastVisitTime(this,System.currentTimeMillis())
+    }
+  }
+  
+  private fun scheduleJob() {
+    val constraints = Constraints.Builder()
+      .setRequiresCharging(true)
+      .build()
+
+    val checkWork =
+      PeriodicWorkRequestBuilder<UserNotHereWorker>(SHOW_NOTIFICATION_AFTER_UNVISITED_MS, TimeUnit.MILLISECONDS)
+        .setConstraints(constraints)
+        .build()
+
+    WorkManager.getInstance(this)
+      .enqueueUniquePeriodicWork("user_present_work",ExistingPeriodicWorkPolicy.KEEP,checkWork)
+  }
+```
