@@ -1,4 +1,3 @@
-###### tags: `homework` `netology` `kotlin`
 # Домашнее задание к лекции "Android: Работа с камерой, Notifications API"
 Для каждой задачи создайте решение на базе Gradle и залейте его в GitHub.
 К заданию должен быть прикреплен сервер.
@@ -8,7 +7,7 @@
 Ваша задача реализовать это у себя в приложении.
 
 API
-```kotlin=
+```kotlin
 // API.kt
 ...
   @Multipart
@@ -18,7 +17,7 @@ API
 ...
 ```
 Модель attachment-а
-```kotlin=
+```kotlin
 data class AttachmentModel(val id: String, val mediaType: AttachmentType) {
   val url
     get() = "$BASE_URL/api/v1/static/$id"
@@ -27,7 +26,7 @@ data class AttachmentModel(val id: String, val mediaType: AttachmentType) {
 
 
 Репозиторий
-```kotlin=
+```kotlin
 // Repository.kt
 ...
   suspend fun upload(bitmap: Bitmap): Response<AttachmentModel> {
@@ -46,7 +45,7 @@ data class AttachmentModel(val id: String, val mediaType: AttachmentType) {
   }
 ```
 Создание поста
-```kotlin=
+```kotlin
 // CreatePostAcivity.kt
 ...
   val REQUEST_IMAGE_CAPTURE = 1
@@ -80,7 +79,7 @@ data class AttachmentModel(val id: String, val mediaType: AttachmentType) {
 
 ```
 Создание поста(продолжение)
-```kotlin=
+```kotlin
 // CreatePostActivity.kt
  private fun imageUploaded() {
     transparetAllIcons()
@@ -104,11 +103,11 @@ data class AttachmentModel(val id: String, val mediaType: AttachmentType) {
       ...
 ```
 Результаты
-| До выбора медиа | После выбора фото
+| До выбора медиа | После выбора фото|
 | -------- | -------- |
-|  ![image alt](https://i.imgur.com/FyM2LtP.png =200x350)  |![image alt](https://i.imgur.com/2xEvVkB.pnghttps://i.imgur.com/gguExx3.png =200x350) |
+|  ![image alt](https://i.imgur.com/FyM2LtP.png =200x350)  | ![image alt](https://i.imgur.com/2xEvVkB.pnghttps://i.imgur.com/gguExx3.png =200x350) |
 Один из способов вставить изображение
-```xml=
+```xml
 //item_post.xml
 ...
     <FrameLayout
@@ -131,7 +130,7 @@ data class AttachmentModel(val id: String, val mediaType: AttachmentType) {
     </FrameLayout>
 ```
 Загрузка в адаптере
-```kotlin=
+```kotlin
 // PostAdapter.kt
       when (post.attachment?.mediaType) {
         AttachmentType.IMAGE -> loadImage(photoImg, post.attachment.url) }
@@ -189,4 +188,4 @@ fun setNotFirstTime(context: Context) =
 ![](https://i.imgur.com/jfJPKL6.jpg)
 
 
-# Задача № 3 (необязательная) - Swipe to refresh
+# Задача № 3 (необязательная) - Jobscheduler и нотификации
