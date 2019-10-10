@@ -106,7 +106,7 @@ data class AttachmentModel(val id: String, val mediaType: AttachmentType) {
 
 | До выбора медиа | После выбора фото|
 | -------- | -------- |
-|![image alt](https://i.imgur.com/FyM2LtP.png =200x350) | ![image alt](https://i.imgur.com/2xEvVkB.pnghttps://i.imgur.com/gguExx3.png) |
+|![image alt](https://i.imgur.com/FyM2LtP.png) | ![image alt](https://i.imgur.com/2xEvVkB.pnghttps://i.imgur.com/gguExx3.png) |
 
 Один из способов вставить изображение
 ```xml
