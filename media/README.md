@@ -264,13 +264,8 @@ fun setLastVisitTime(context: Context, currentTimeMillis: Long) =
   }
   
   private fun scheduleJob() {
-    val constraints = Constraints.Builder()
-      .setRequiresCharging(true)
-      .build()
-
     val checkWork =
       PeriodicWorkRequestBuilder<UserNotHereWorker>(SHOW_NOTIFICATION_AFTER_UNVISITED_MS, TimeUnit.MILLISECONDS)
-        .setConstraints(constraints)
         .build()
 
     WorkManager.getInstance(this)
