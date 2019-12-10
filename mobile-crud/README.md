@@ -125,20 +125,7 @@ class PostViewHolder(val adapter: PostAdapter, view: View) : RecyclerView.ViewHo
           if (item.likeActionPerforming) {
             context.toast("Like is performing")
           } else {
-            GlobalScope.launch(Dispatchers.Main) {
-              item.likeActionPerforming = true
-              adapter.notifyItemChanged(currentPosition)
-              val response = if (item.likedByMe) {
-                Repository.cancelMyLike(item.id)
-              } else {
-                Repository.likedByMe(item.id)
-              }
-              item.likeActionPerforming = false
-              if (response.isSuccessful) {
-                item.updatePost(response.body()!!)
-              }
-              adapter.notifyItemChanged(currentPosition)
-            }
+            adapter.likeBtnClickListener?.onLikeBtnClicked(item, currentPosition)
           }
         }
       }
@@ -150,16 +137,7 @@ class PostViewHolder(val adapter: PostAdapter, view: View) : RecyclerView.ViewHo
             context.toast("Can't repost repost)")
           } else {
             showDialog(context) {
-              GlobalScope.launch(Dispatchers.Main) {
-                item.repostActionPerforming = true
-                adapter.notifyItemChanged(currentPosition)
-                val response = Repository.makeRepost(item.id, it)
-                item.repostActionPerforming = false
-                if (response.isSuccessful) {
-                  item.updatePost(response.body()!!)
-                }
-                adapter.notifyItemChanged(currentPosition)
-              }
+              adapter.repostsBtnClickListener?.onRepostsBtnClicked(item, currentPosition)
             }
           }
         }
